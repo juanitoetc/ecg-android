@@ -330,7 +330,7 @@ public class BluetoothService{
                     Log.e(TAG, "HiloCliente.run(): Error cerrando el socket", inner);
                 }
                 setEstado(ESTADO_NINGUNO);
-                return;
+                return;         // terminates run before calling realizarConexion
             }
 
             // Reiniciamos el hilo cliente, ya que no lo necesitaremos mas
