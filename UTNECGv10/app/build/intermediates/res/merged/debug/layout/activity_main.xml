@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <!-- Usamos un RelativeLayout para centrar el boton -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" >
+
+        <Button
+            android:id="@+id/btnBluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:drawableLeft="@android:drawable/stat_sys_data_bluetooth"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="" />
+
+
+    <ListView
+        android:id="@+id/lvDispositivos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
+    </ListView>
+
+
+    <!-- Usamos un LinearLayout para alinear el boton y la caja de texto -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnBuscarDispositivo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/BuscarDispositivo" />
+
+        <Button
+            android:id="@+id/btnConectarDispositivo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/MostrarEnlazados" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvConexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SinConexion" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Enviar"
+            android:layout_weight="0.5" />
+
+        <EditText
+            android:id="@+id/txtMensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnContinue"
+            android:text="@string/Continuar"
+            android:layout_weight="0.5"
+            android:drawableLeft="@android:drawable/ic_menu_add"/>
+
+        <Button
+            android:id="@+id/btnSalir"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Salir"
+            android:layout_weight="0.5"
+            android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

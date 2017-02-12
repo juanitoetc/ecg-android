@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.utn.juanignacio.utnecgv10.ActivityPlot">
+
+    <item android:id="@+id/menu_item_share"
+        app:showAsAction="ifRoom"
+        android:title="Share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:panelFullBackground="@android:color/white"
+        />
+    <!--android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"-->
+</menu>

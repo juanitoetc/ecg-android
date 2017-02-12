@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher_ecg.png",
+        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/mipmap-hdpi/ic_launcher_ecg.png"
+    }
+]

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.utn.juanignacio.utnecgv10"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_ecg"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.ActivityPlot"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_activity_plot"
+            android:theme="@style/AppTheme" >
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.pacientMenuActivity"
+            android:label="@string/title_activity_pacient_menu_bar" >
+        </activity>
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.addPacientActivity"
+            android:label="@string/title_activity_add_pacient_bar"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.viewPacientActivity"
+            android:label="@string/title_activity_view_pacient" >
+        </activity>
+        <activity
+            android:name="com.utn.juanignacio.utnecgv10.seePacientActivity"
+            android:label="@string/title_activity_see_pacient" >
+        </activity>
+    </application>
+
+</manifest><!--
+ Nota: se agregaron varias lineas, una importante es singleTop
+    gracias a StackOverflow para rotar la pantalla y volver correctamente
+-->

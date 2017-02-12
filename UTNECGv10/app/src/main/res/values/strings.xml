@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">UTNECGv10</string>
+    <string name="action_settings">Settings</string>
+    <string name="Enviar">Enviar</string>
+    <string name="Continuar">Continuar</string>
+    <string name="BuscarDispositivo">Buscar</string>
+    <string name="Conectar">Conectar</string>
+    <string name="MostrarEnlazados">Enlazados</string>
+    <string name="ActivarBluetooth">Activar bluetooth</string>
+    <string name="DesactivarBluetooth">Desactivar bluetooth</string>
+    <string name="Confirmar">Confirmar</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="Salir">Salir</string>
+
+    <!-- Mensajes -->
+    <string name="SinConexion">Conexión actual: SIN CONEXIÓN</string>
+    <string name="ConexionActual">Conexión actual:</string>
+    <string name="ConectandoA">Conectando a</string>
+    <string name="IniciandoDescubrimiento">Iniciando búsqueda de dispositivos bluetooth&#8230;</string>
+    <string name="ErrorIniciandoDescubrimiento">Error al iniciar búsqueda de dispositivos bluetooth</string>
+    <string name="DetectadoDispositivo">Detectado dispositivo</string>
+    <string name="FinBusqueda">Fin de la búsqueda</string>
+    <string name="EnviandoMensaje">Enviando mensaje</string>
+    <string name="MsgConfirmarConexion">¿Conectar al dispositivo</string>
+    <string name="MsgErrorConexion">Error al enviar al mensaje: no hay conexiones activas</string>
+        <string name="title_activity_activity_plot">ActivityPlot</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_pacient_menu">pacientMenuActivity</string>
+    <string name="title_activity_pacient_menu_bar">MENU PRINCIPAL - ECG</string>
+
+    <!-- Activity Pacient Menu -->
+    <string name="btn_Add">Agregar Estudio</string>
+    <string name="btn_Edit">Ver Estudios Guardados</string>
+    <string name="btn_Delete">Eliminar Estudio</string>
+    <string name="btn_Config">Configuracion</string>
+    <string name="btn_Back">Volver</string>
+    <string name="title_activity_add_pacient">Ingrese un nuevo estudio</string>
+
+    <!-- Activity Pacient ADD -->
+    <string name="title_activity_add_pacient_bar">Ingrese un Nuevo Estudio</string>
+    <string name="txt_lastName">APELLIDO</string>
+    <string name="txt_firstName">NOMBRE</string>
+    <string name="txt_id">DOCUMENTO</string>
+    <string name="txt_telefono">TELEFONO</string>
+    <string name="txt_observations">OBSERVACIONES</string>
+    <string name="btn_makeECG">Realizar ECG</string>
+    <string name="btn_saveRegister">Guardar</string>
+    <string name="title_activity_view_pacient">Listado de Pacientes</string>
+
+    <!-- ACTIVIDAD activity_see_pacient-->
+    <string name="title_activity_see_pacient">Estudio Personal</string>
+    <string name="btnLeadI">Lead I</string>
+    <string name="btnLeadII">Lead II</string>
+    <string name="btnLeadIII">Lead III</string>
+    <string name="btnAllLeads">Estudio Completo</string>
+
+</resources>

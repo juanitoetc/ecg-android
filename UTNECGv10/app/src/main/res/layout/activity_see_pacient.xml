@@ -1,0 +1,228 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.utn.juanignacio.utnecgv10.seePacientActivity"
+    android:background="#ffd8d8d8">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="false">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="APELLIDO"
+                android:id="@+id/textView5"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="NOMBRE"
+                android:id="@+id/textView6"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restLastName"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restFirstName"
+                android:layout_weight="0.5"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="DOCUMENTO"
+                android:id="@+id/textView17"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="TELEFONO"
+                android:id="@+id/textView18"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restDoc"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restPhone"
+                android:layout_weight="0.5"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="OBSERVACIONES"
+                android:id="@+id/textView27"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="FECHA DE REALIZACION"
+                android:id="@+id/textView28"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restObserv"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restDate"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="@string/btnLeadI"
+                android:id="@+id/id_btnLeadI"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_press" />
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="@string/btnLeadII"
+                android:id="@+id/id_btnLeadII"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_press" />
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="@string/btnLeadIII"
+                android:id="@+id/id_btnLeadIII"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_press" />
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="@string/btnAllLeads"
+                android:id="@+id/id_btnAllLeads"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_press" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
