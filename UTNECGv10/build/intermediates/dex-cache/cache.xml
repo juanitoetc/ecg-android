@@ -12,6 +12,42 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_1a28406c3f839a9b0d438644ea258a5111a20b61.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_46d2535ab3794b9bf5b9bc39cd7e2b938a01957a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-22.2.1_df5990aac268163d3fd7783f39c1349da33a994f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-22.2.1_8e74a098241424b50b47ff3a9db133e2e961f2db.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -21,12 +57,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jar="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/libs/androidplot-core-0.6.1.jar"
         jumboMode="false"
         optimize="true"
         revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_1a28406c3f839a9b0d438644ea258a5111a20b61.jar" />
+        sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
+        <dex dex="/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/pre-dexed/debug/androidplot-core-0.6.1_a2df451bd5b8dbdd9d54fcb0a9cb40dbf48fa222.jar" />
     </item>
     <item
         is-multidex="false"

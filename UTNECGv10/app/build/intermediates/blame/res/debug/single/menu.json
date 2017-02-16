@@ -8,40 +8,16 @@
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/src/main/res/menu/menu_activity_plot.xml"
     },
     {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_see_pacient.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_see_pacient.xml"
-    },
-    {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_pacient_menu.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_pacient_menu.xml"
-    },
-    {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_view_pacient.xml",
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/src/main/res/menu/menu_view_pacient.xml"
-    },
-    {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_add_pacient.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_add_pacient.xml"
     },
     {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_add_pacient.xml",
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/src/main/res/menu/menu_add_pacient.xml"
     },
     {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_activity_plot.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_activity_plot.xml"
-    },
-    {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_view_pacient.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_view_pacient.xml"
-    },
-    {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_pacient_menu.xml",
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/src/main/res/menu/menu_pacient_menu.xml"
-    },
-    {
-        "merged": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
-        "source": "/home/juani/MyGitHub/ECG Portable/UTNECGv10/app/src/main/res/menu/menu_main.xml"
     },
     {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/menu/menu_see_pacient.xml",

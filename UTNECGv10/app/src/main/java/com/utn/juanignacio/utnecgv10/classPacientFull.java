@@ -34,7 +34,10 @@ public final class classPacientFull {
         str_cTimeStamp = "-14182940000"; /*Moon landing - Fecha de prueba: aterrizaje en la luna*/
 
         samp_cLeadI = new SamplesECG(); /*Inicializo */
-
+        str_cLeadI = samp_cLeadI.getSamplesInString(samp_cLeadI.Samples);
+        /*Creo directorio del paciente*/
+        String str_Directory = createDirectory(str_cPacientLastName, int_cPacientDocum );
+        str_cPath = str_Directory;
 
     }
 
@@ -105,6 +108,38 @@ public final class classPacientFull {
         str_cPacientLastName = apellido;
         str_cPacientFirstName = nombre;
         int_cPacientDocum = documento;
+    }
+
+    public classPacientFull(String apellido, String nombre, String documento, String telefono, String observacion, SamplesECG muestras, boolean version_final)
+    {
+        /*Cargo datos del paciente inclusive los vacios*/
+
+        /*Apellido*/
+        if (apellido.matches("") || apellido == null || apellido.isEmpty())
+            str_cPacientLastName = "";
+        else
+            str_cPacientLastName = apellido;
+        /*nombre*/
+        if (nombre.matches("") || nombre == null || nombre.isEmpty())
+            str_cPacientFirstName = "";
+        else
+            str_cPacientFirstName = nombre;
+        /*Apellido*/
+        if (documento.matches("") ||  documento == null || documento.isEmpty())
+            int_cPacientDocum = 0;
+        else
+            int_cPacientDocum = addPacientActivity.str2int(documento);
+        if (!(telefono.matches("")) && !(telefono == null) && !(telefono.isEmpty()))
+            int_cPacientPhone = addPacientActivity.str2int(telefono);
+        if (!(observacion.matches("")) && !(observacion == null) && !(observacion.isEmpty()))
+            str_cObserv = observacion;
+
+        /*Cargo datos del ECG*/
+        samp_cLeadI = muestras;
+        str_cLeadI = muestras.getSamplesInString(muestras.Samples);
+        /*Creo directorio del paciente*/
+        String str_Directory = createDirectory(apellido, addPacientActivity.str2int(documento));
+        str_cPath = str_Directory;
     }
 
 }

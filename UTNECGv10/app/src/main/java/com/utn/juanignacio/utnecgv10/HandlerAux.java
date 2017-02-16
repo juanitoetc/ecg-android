@@ -5,6 +5,7 @@ import android.os.Handler;
 public class HandlerAux{
 
     public static final int	LETRA_H = 72;
+    public static final int LETRA_F = 70;
 
     private static Handler handleraux;
 
