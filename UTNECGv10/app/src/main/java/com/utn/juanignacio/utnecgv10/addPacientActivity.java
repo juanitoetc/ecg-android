@@ -114,6 +114,7 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
         SamplesECG canal1;
         //int[] muestras2 = new int[500*3];
         int[] muestras2;
+        DigitalFilter samplesFiltered = new DigitalFilter();
 
         editT_var_lastName = (EditText) findViewById(R.id.editT_lastName);
         editT_var_firstName = (EditText) findViewById(R.id.editT_firstName);
@@ -130,23 +131,27 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
             /*No se realizo el estudio del ECG y ademas no hay conexion Bt.*/
             Toast.makeText(getApplicationContext(), "Atencion: ECG: No realizado. BT: No conectado. Guardando datos paciente.",Toast.LENGTH_LONG).show();
             canal1 = new SamplesECG();
+            canal1.Samples = samplesFiltered.iirFilter(canal1.Samples);
         }
         else if (bool_Receive == false && isConectionActive == true){
             /*  No se realizo el estudio del ECG y pero hax conexion Bt.
                 Recomendar conectar Bt para guardar el ECG del paciente */
             Toast.makeText(getApplicationContext(), "Atencion: ECG: No realizado. BT: Conectado. Guardando datos paciente.",Toast.LENGTH_LONG).show();
             canal1 = new SamplesECG();
+            canal1.Samples = samplesFiltered.iirFilter(canal1.Samples);
         }
         else if (bool_Receive == true && isConectionActive == false) {
             /*  Se realizo previamente el estudio del ECG y pero Antes de guardarlo se desconecto. Avisar para los proximos estudios */
             Toast.makeText(getApplicationContext(), "Atencion: ECG: Correcto. BT: Desconectado. Guardando datos paciente y ECG.",Toast.LENGTH_LONG).show();
             canal1 = (SamplesECG) datos.getSerializable("serial");
+            canal1.Samples = samplesFiltered.iirFilter(canal1.Samples);
         }
         else {
             /*Se hizo previamente el estudio ECG y sigue habiendo BT */
             bool_Receive = false; /*Libero el flag que indica si se realizo ya el estudio y no se guardo*/
             Toast.makeText(getApplicationContext(), "ECG: Correcto. BT: Conectado. Guardando datos paciente y ECG.", Toast.LENGTH_LONG).show();
             canal1 = (SamplesECG) datos.getSerializable("serial");
+            canal1.Samples = samplesFiltered.iirFilter(canal1.Samples);
         }
 
             /* TODO: ESTA PARTE DEL CODIGO ESTA IMPLEMENTADA DOS VECES. ELIMINAR LA PRIMERA VERSION. */

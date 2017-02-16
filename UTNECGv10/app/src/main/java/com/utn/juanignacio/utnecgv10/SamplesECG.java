@@ -1554,7 +1554,7 @@ public final class SamplesECG implements Serializable {
                 recup[0] = Integer.parseInt(s[0].substring(1));
             }
             else if (curr == (s.length)-1){
-                    /*Elimino el ultimo simbolo extra�o ]*/
+                    /*Elimino el ultimo simbolo extranio ]*/
                 recup[curr] = Integer.parseInt(s[curr].substring(1,s[curr].length()-1));
             }
             else {
@@ -1566,4 +1566,3 @@ public final class SamplesECG implements Serializable {
         return recup;
     }
 }
-
