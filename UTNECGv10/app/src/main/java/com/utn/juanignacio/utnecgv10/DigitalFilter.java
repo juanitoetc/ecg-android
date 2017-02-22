@@ -10,8 +10,10 @@ public class DigitalFilter {
     public double[] a_notch_50 = new double[]{1,-1.593009003579764,0.969067417193793};
     public double[] b_lowpass = new double[]{41,195,443,577,316,0,0,0,740,1206,99,0,0,1008,6781,11385,11385,6781,1008,0,0,99,1206,740,0,0,0,316,577,443,195,41};
     public double[] a_lowpass = new double[]{1};
+    public double[] b_bandpass = new double[]{0.175124050220482, 0, -0.700496200881930, 0, 1.050744301322894, 0, -0.700496200881930, 0, 0.175124050220482};
+    public double[] a_bandpass = new double[]{1,-3.188390463247433,3.595316282794339,-2.344356989904013, 2.280493390848253, -1.973417539922519, 0.707374952065500, -0.147850253488695, 0.070830620991567};
 
-    public int[] iirFilter(double[] bCoeff, double[] aCoeff, int[] samples){
+    public int[] iirFilter(double[] bCoeff, double[] aCoeff, int[] samples, String type){
         /* Metedo para implemetacion de un filtro IIR */
 
         double x_sum = 0;
@@ -42,12 +44,21 @@ public class DigitalFilter {
             // Diferencia entre ambas sumatorias
             y_out[y_index] = x_sum - y_sum;
         }
-        // Escalo el array de salida y lo casteo a entero
+        // lo llevo a integer
         int[] int_y_out = new int[y_out.length];
-        sumCoefa = sumCoeff(aCoeff);
-        sumCoefb = sumCoeff(bCoeff);
-        for (int i=0; i<int_y_out.length; i++)
-            int_y_out[i] = (int)(((y_out[i])*(sumCoefa))/(sumCoefb));
+
+        // Si a la salida tenemos una ganancia en continua hay que escalarlo
+        if (type.equals("lowpass") == true) {
+
+            sumCoefa = sumCoeff(aCoeff);
+            sumCoefb = sumCoeff(bCoeff);
+            for (int i=0; i<int_y_out.length; i++)
+                int_y_out[i] = (int)(((y_out[i])*(sumCoefa))/(sumCoefb));
+        }else{
+            for (int i=0; i<int_y_out.length; i++)
+                int_y_out[i] = (int)(y_out[i]);
+        }
+
         // retorno el array con la senial filtrada
         return int_y_out;
     }

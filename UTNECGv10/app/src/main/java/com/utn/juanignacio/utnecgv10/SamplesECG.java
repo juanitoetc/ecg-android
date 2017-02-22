@@ -1519,14 +1519,11 @@ public final class SamplesECG implements Serializable {
                 };
         }
 
-        public SamplesECG(int[] muestras)
-        {
-            fs = 500;            //Frecuencia de muestreo
-            Samples = new int[500*3];
-            int i;
+        public SamplesECG(int[] muestras) {
 
-            for(i=0; i < Samples.length; i++)
-                Samples[i]=muestras[i];
+                fs = 500;            //Frecuencia de muestreo
+                Samples = new int[500*4];
+                Samples = muestras;
         }
 
         public String getSamplesInString (int[] muestras){

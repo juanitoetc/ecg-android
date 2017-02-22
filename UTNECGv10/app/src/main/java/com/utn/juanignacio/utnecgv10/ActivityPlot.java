@@ -52,6 +52,7 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
     public double DatosX, DatosY;
     public double MAX_Value;
     public double MIN_Value;
+    public String path_img;
 
     /* FinAndroid Plot Variables*/
 
@@ -68,7 +69,9 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         //Obtengo la información de la Actividad anterior y se la asigno a la variable info.
         Intent men = getIntent();
 
-        SamplesECG canal1 = new SamplesECG(men.getIntArrayExtra(MainActivity.DATA_SENT));
+        SamplesECG canal1 = new SamplesECG(men.getIntArrayExtra("muestras"));
+        String lead = new String(men.getStringExtra("lead"));
+        path_img = new String(men.getStringExtra("path"));
 
         /* Inicio Android Plot */
         /*Busco los valores maximos y minimos dentro del array de datos para graficar correctamente*/
@@ -152,7 +155,7 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
             VectorXYPlot.add(DatosY);
         }
 
-        XYSeries series = new SimpleXYSeries(VectorXYPlot, SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED,"ECG Signal");
+        XYSeries series = new SimpleXYSeries(VectorXYPlot, SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED,lead);
         LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.rgb(0, 0, 0), 0x00, 0x00, null);
 
         plot.clear();
@@ -176,7 +179,7 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
 
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(Environment.getExternalStorageDirectory() + "/test1.png", true);
+            fos = new FileOutputStream(path_img, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -184,6 +187,7 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         combine.compress(Bitmap.CompressFormat.PNG, 100, fos);
 
         try {
+            fos.flush();
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -245,7 +249,7 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         Intent intent_share = new Intent(Intent.ACTION_SEND);
         //intent_share.setType("text/plain");
         intent_share.setType("image/*");
-        File image = new File(Environment.getExternalStorageDirectory(), "test1.png");
+        File image = new File(path_img);
         Uri uriSavedImage = Uri.fromFile(image);
 
         intent_share.putExtra(Intent.EXTRA_STREAM, uriSavedImage);

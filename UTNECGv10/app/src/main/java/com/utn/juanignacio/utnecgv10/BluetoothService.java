@@ -393,15 +393,23 @@ public class BluetoothService{
         // Metodo principal del hilo, encargado de realizar las lecturas
         public void run()
         {
-            debug("HiloConexion.run()", "Iniciando metodo");
-            byte[] buffer = new byte[1024];
-            int bytes;
 
             debug("HiloConexion.run()", "Iniciando metodo");
+            byte[] buffer_samples_DI = new byte[500*4*4];   // 500 sps
+            byte[] buffer_samples_DII = new byte[500*4*4];   // 500 sps
+            byte[] buffer_recepcion = new byte [1];
+            int[] muestras_DI = new int [(buffer_samples_DI.length)/4];;
+            int[] muestras_DII = new int [(buffer_samples_DI.length)/4];;
+            int[] muestras_DIII = new int [(buffer_samples_DI.length)/4];;
+            int[] aux_muestras_DI = new int[500*4];//3 seg
+            int[] aux_muestras_DII = new int[500*4];//3 seg
+            int[] aux_muestras_DIII = new int[500*4];//3 seg
+
             byte[] buffer_samples = new byte[500*3*4];   // 3600 muestras, 4 bytes c/u
             byte[] largo_msj = new byte[5];
             int largo;
             int bytes_samples;
+
             char start_of_tx=0;
             int[] muestras = new int[500*3];
 
@@ -409,18 +417,21 @@ public class BluetoothService{
             // Mientras se mantenga la conexion el hilo se mantiene en espera ocupada
             // leyendo del flujo de entrada
 
+            // Dos veces, no cambiar
             setEstado(ESTADO_CONECTADO);
-            // Mientras se mantenga la conexion el hilo se mantiene en espera ocupada
-            // leyendo del flujo de entrada
+
+            // Obtengo el handler de addPatientActivity
+            Handler handler2 = HandlerAux.getHandleraux();
+
             while(true)
             {
                 try {
                     // Leemos del flujo de entrada del socket
                     bytes_samples=0;
 
-                    inputStream.read(largo_msj,0,1);
-                    start_of_tx|=largo_msj[0];
-                     if(start_of_tx== 3) { //1 para iniciar transmision
+                    inputStream.read(buffer_recepcion,0,1);
+
+                     if(((char) buffer_recepcion[0]) == 3) { //3 para iniciar recepcion
 
                         while ( bytes_samples<4)
                             bytes_samples += inputStream.read(largo_msj, bytes_samples, 4 - bytes_samples); // recibo el largo del msj q me van a mandar
@@ -433,56 +444,69 @@ public class BluetoothService{
                         largo |= 0xFF000000&largo_msj [3] << 24;
 
                         bytes_samples=0;
-                        while (largo != bytes_samples)
-                            bytes_samples += inputStream.read(buffer_samples, bytes_samples, largo - bytes_samples); // recibo el msj
+                        while (bytes_samples != largo)
+                            bytes_samples += inputStream.read(buffer_samples_DI, bytes_samples, largo - bytes_samples); // recibo el buffer de muestras DI
+                         while (bytes_samples != largo)
+                             bytes_samples += inputStream.read(buffer_samples_DII, bytes_samples, largo - bytes_samples); // recibo el buffer de muestras de DII
 
                         for (int i =0; i<3*500 ; i++)
                         {
-                            muestras[i]=0;
-                            //codifico cada muestra como int agrupando de a 4 bytes
-                            muestras[i]|=0x000000FF&buffer_samples[4*i];
-                            muestras[i]|=0x0000FF00&buffer_samples[4*i+1]<<8;
-                            muestras[i]|=0x00FF0000&buffer_samples[4*i+2]<<16;
-                            muestras[i]|=0xFF000000&buffer_samples[4*i+3]<<24;
+                            //Inicializo el entero en el cual trabajo
+                            muestras_DI[i]=0;
+                            muestras_DII[i]= 0;
+                            muestras_DIII[i]= 0;
+                            //codifico cada muestra de DI como int (4 bytes)
+                            muestras_DI[i] |= 0x000000FF&buffer_samples_DI[4*i];
+                            muestras_DI[i] |= 0x0000FF00&buffer_samples_DI[4*i+1]<<8;
+                            muestras_DI[i] |= 0x00FF0000&buffer_samples_DI[4*i+2]<<16;
+                            muestras_DI[i] |= 0xFF000000&buffer_samples_DI[4*i+3]<<24;
+                            //codifico cada muestra de DII como int (4 bytes)
+                            muestras_DII[i] |= 0x000000FF&buffer_samples_DII[4*i];
+                            muestras_DII[i] |= 0x0000FF00&buffer_samples_DII[4*i+1]<<8;
+                            muestras_DII[i] |= 0x00FF0000&buffer_samples_DII[4*i+2]<<16;
+                            muestras_DII[i] |= 0xFF000000&buffer_samples_DII[4*i+3]<<24;
+                            //Formo DIII  como resta de dos enteros
+                            muestras_DIII[i] = muestras_DII[i]-muestras_DI[i];;
 
                         }
-                        // Enviamos la informacion a la actividad a traves del handler.
-                        // El metodo handleMe5ssage sera el encargado de recibir el mensaje
-                        // y mostrar los datos recibidos en el TextView
-                        handler.obtainMessage(MSG_LEER, muestras.length, -1, muestras).sendToTarget();
-                        //          handler.obtainMessage(MSG_LEER, "", -1, buffer).sendToTarget();
-                        sleep(500);
-                    }
-                    else if(start_of_tx == 72){
+                         // Genero las tres instancias de una clase de muestras inicializandolas con muestras
+                         SamplesECG canal_I = new SamplesECG(muestras_DI);
+                         SamplesECG canal_II = new SamplesECG(muestras_DII);
+                         SamplesECG canal_III = new SamplesECG(muestras_DIII);
 
-                        Handler handler2 = HandlerAux.getHandleraux();
+                         // Mensaje y bundle para comunicarme a travez de activities
+                         Message m = new Message();
+                         Bundle b = new Bundle();
 
-                        //bytes_samples = 0;
-                        //while (4 != bytes_samples){
-                            //Me quedo esperando por que s� que largo del mensaje viene en un entero (el ragngo de un int es lo sufiente como almacenar el largo)
-                         //   bytes_samples += inputStream.read(largo_msj, bytes_samples, 4 - bytes_samples);
-                        //}
+                         b.putSerializable("canal1", canal_I);
+                         b.putSerializable("canal2", canal_II);
+                         b.putSerializable("canal3", canal_III);
 
-                        SamplesECG canal = new SamplesECG();
+                         b.putIntArray("muestras1", canal_I.Samples);
+                         b.putIntArray("muestras2", canal_II.Samples);
+                         b.putIntArray("muestras3", canal_III.Samples);
 
-                        Message m = new Message();
-                        Bundle b = new Bundle();
+                         b.putString("key", "Muestreo exitoso. Guarde el paciente.");
 
-                        b.putSerializable("serial", canal);
+                         m.what = HandlerAux.LETRA_H;
+                         m.setData(b);
 
-                        b.putIntArray("muestras", canal.Samples);
-                        b.putString("key", "Hola");
-                        m.what = HandlerAux.LETRA_H;
-                        m.setData(b);
+                         // Envio mensaje a la clase addPatient
+                         handler2.sendMessage(m);
 
-                        handler2.sendMessage(m);
-                    }
-                }
+                         // handler.obtainMessage(MSG_LEER, muestras_DI.length, -1, muestras_DI).sendToTarget();
+                         // Espero un poco para que el handler pueda terminar el proceso
+                         // sleep(500);
+                         // handler.obtainMessage(MSG_LEER, muestras_DII.length, -1, muestras_DII).sendToTarget();
+                         // sleep(500);
+                         // handler.obtainMessage(MSG_LEER, muestras_DIII.length, -1, muestras_DIII).sendToTarget();
+                         // sleep(500);
 
-                catch(IOException e) {
+                    }else if (((char) buffer_recepcion[0])==4) {
+                         outputStream.write(4);// devuelvo el keepalive
+                         }
+                } catch(IOException e) {
                     Log.e(TAG, "HiloConexion.run(): Error al realizar la lectura", e);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         }

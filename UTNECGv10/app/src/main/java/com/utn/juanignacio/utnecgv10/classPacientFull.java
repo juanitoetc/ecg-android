@@ -16,9 +16,14 @@ public final class classPacientFull {
     public int int_cPacientPhone;
     public String str_cObserv;
     public String str_cLeadI;
+    public SamplesECG samp_cLeadI;
+    public String str_cLeadII;
+    public SamplesECG samp_cLeadII;
+    public String str_cLeadIII;
+    public SamplesECG samp_cLeadIII;
     public String str_cPath;
     public String str_cTimeStamp;
-    public SamplesECG samp_cLeadI;
+
 
     /* Constructor por defecto*/
     public classPacientFull() {
@@ -110,7 +115,7 @@ public final class classPacientFull {
         int_cPacientDocum = documento;
     }
 
-    public classPacientFull(String apellido, String nombre, String documento, String telefono, String observacion, SamplesECG muestras, boolean version_final)
+    public classPacientFull(String apellido, String nombre, String documento, String telefono, String observacion, SamplesECG muestras1, SamplesECG muestras2, SamplesECG muestras3)
     {
         /*Cargo datos del paciente inclusive los vacios*/
 
@@ -134,9 +139,14 @@ public final class classPacientFull {
         if (!(observacion.matches("")) && !(observacion == null) && !(observacion.isEmpty()))
             str_cObserv = observacion;
 
-        /*Cargo datos del ECG*/
-        samp_cLeadI = muestras;
-        str_cLeadI = muestras.getSamplesInString(muestras.Samples);
+        /*Guardo los datos del ECG*/
+        samp_cLeadI = muestras1;
+        str_cLeadI = muestras1.getSamplesInString(muestras1.Samples);
+        samp_cLeadII = muestras2;
+        str_cLeadII = muestras2.getSamplesInString(muestras2.Samples);
+        samp_cLeadIII = muestras3;
+        str_cLeadIII = muestras3.getSamplesInString(muestras3.Samples);
+
         /*Creo directorio del paciente*/
         String str_Directory = createDirectory(apellido, addPacientActivity.str2int(documento));
         str_cPath = str_Directory;

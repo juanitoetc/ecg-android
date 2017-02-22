@@ -151,15 +151,101 @@ public class seePacientActivity extends ActionBarActivity implements View.OnClic
                             /*Intent for start plot activity*/
                             Intent intent_ActivityPlot = new Intent(getApplicationContext(), ActivityPlot.class);
                             /*Extras to the intent, the tag of the putExtra is in the main*/
-                            intent_ActivityPlot.putExtra(MainActivity.DATA_SENT, muestras2);
+                            //intent_ActivityPlot.putExtra(MainActivity.DATA_SENT, muestras2);
+                            intent_ActivityPlot.putExtra("muestras", muestras2);
+                            intent_ActivityPlot.putExtra("lead", "LEAD I");
+                            intent_ActivityPlot.putExtra("path", str_path+"/"+restoreCursor.getString(1)+"_I_"+restoreCursor.getString(10)+".png");
                             startActivity(intent_ActivityPlot);
 
                             //mensaje = new String(buffer, 0, msg.arg1);
                             //tvMensaje.setText(mensaje);
-                            break;
                         }
 
                     } while (restoreCursor.moveToNext());
+                    break;
+                }
+            }
+            case R.id.id_btnLeadII:{
+
+                if (restoreCursor.moveToFirst()) {
+                    do {
+                        /*Abro el archivo, por ejemplo /storage/sdcard0/ECGPro/ROBLEDO 35804885/ROBLEDO_I_14537494*/
+                        File file = new File(str_path+"/"+restoreCursor.getString(1)+"_II_"+restoreCursor.getString(10)+".png");
+                        /*Muestro el Path... quiero ver si se grabo correctamente*/
+                        Toast.makeText(this, "Abriendo ruta: " + str_path+"/"+restoreCursor.getString(1)+"_II_"+restoreCursor.getString(10) , Toast.LENGTH_SHORT).show();
+                        /*Preguntar si existe la imagen.*/
+                        if(file.exists()) {
+                            /* Si existe, abrir directamente la imagen.*/
+                            /* Recordar eliminar la carpeta con las iamgenes si se elimina al paciente*/
+                            Toast.makeText(this, "Abriendo...", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent();
+                            i.setAction(android.content.Intent.ACTION_VIEW);
+                            i.setDataAndType(Uri.fromFile(file), "image/png");
+                            startActivity(i);
+                        }
+                        else {
+                            /*Si no existe, crearla instanciando la clase ActivityPlot con el constructor
+                            del vector de enteros y guardandola correctamente.*/
+                            Toast.makeText(this, "Generando...", Toast.LENGTH_SHORT).show();
+                            /**/
+                            String[] strM_Samples = sampECG_Leads.getSamplesInMatrix(restoreCursor.getString(7));
+                            muestras2 = sampECG_Leads.getSamplesInIntArray(strM_Samples);
+                            /*Intent for start plot activity*/
+                            Intent intent_ActivityPlot = new Intent(getApplicationContext(), ActivityPlot.class);
+                            /*Extras to the intent, the tag of the putExtra is in the main*/
+                            //intent_ActivityPlot.putExtra(MainActivity.DATA_SENT, muestras2);
+                            intent_ActivityPlot.putExtra("muestras", muestras2);
+                            intent_ActivityPlot.putExtra("lead", "LEAD II");
+                            intent_ActivityPlot.putExtra("path", str_path+"/"+restoreCursor.getString(1)+"_II_"+restoreCursor.getString(10)+".png");
+                            startActivity(intent_ActivityPlot);
+
+                            //mensaje = new String(buffer, 0, msg.arg1);
+                            //tvMensaje.setText(mensaje);
+                        }
+
+                    } while (restoreCursor.moveToNext());
+                    break;
+                }
+            }
+            case R.id.id_btnLeadIII:{
+
+                if (restoreCursor.moveToFirst()) {
+                    do {
+                        /*Abro el archivo, por ejemplo /storage/sdcard0/ECGPro/ROBLEDO 35804885/ROBLEDO_I_14537494*/
+                        File file = new File(str_path+"/"+restoreCursor.getString(1)+"_III_"+restoreCursor.getString(10)+".png");
+                        /*Muestro el Path... quiero ver si se grabo correctamente*/
+                        Toast.makeText(this, "Abriendo ruta: " + str_path+"/"+restoreCursor.getString(1)+"_III_"+restoreCursor.getString(10) , Toast.LENGTH_SHORT).show();
+                        /*Preguntar si existe la imagen.*/
+                        if(file.exists()) {
+                            /* Si existe, abrir directamente la imagen.*/
+                            /* Recordar eliminar la carpeta con las iamgenes si se elimina al paciente*/
+                            Toast.makeText(this, "Abriendo...", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent();
+                            i.setAction(android.content.Intent.ACTION_VIEW);
+                            i.setDataAndType(Uri.fromFile(file), "image/png");
+                            startActivity(i);
+                        }
+                        else {
+                            /*Si no existe, crearla instanciando la clase ActivityPlot con el constructor
+                            del vector de enteros y guardandola correctamente.*/
+                            Toast.makeText(this, "Generando...", Toast.LENGTH_SHORT).show();
+                            /**/
+                            String[] strM_Samples = sampECG_Leads.getSamplesInMatrix(restoreCursor.getString(8));
+                            muestras2 = sampECG_Leads.getSamplesInIntArray(strM_Samples);
+                            /*Intent for start plot activity*/
+                            Intent intent_ActivityPlot = new Intent(getApplicationContext(), ActivityPlot.class);
+                            /*Extras to the intent, the tag of the putExtra is in the main*/
+                            //intent_ActivityPlot.putExtra(MainActivity.DATA_SENT, muestras2);
+                            intent_ActivityPlot.putExtra("muestras", muestras2);
+                            intent_ActivityPlot.putExtra("lead", "LEAD III");
+                            intent_ActivityPlot.putExtra("path", str_path+"/"+restoreCursor.getString(1)+"_III_"+restoreCursor.getString(10)+".png");
+                            startActivity(intent_ActivityPlot);
+
+                            //mensaje = new String(buffer, 0, msg.arg1);
+                            //tvMensaje.setText(mensaje);
+                        }
+                    } while (restoreCursor.moveToNext());
+                    break;
                 }
             }
     }

@@ -148,9 +148,9 @@ public class MainActivity extends Activity
         @Override
         public void handleMessage(Message msg)
         {
-            int[] buffer_samples 	= null;
+            int[] buffer_samples = null;
             byte[] buffer = null;
-            String mensaje 	= null;
+            String mensaje = null;
 
             // Atendemos al tipo de mensaje
             switch(msg.what)

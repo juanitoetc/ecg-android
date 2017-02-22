@@ -112,6 +112,8 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
         String observ;
         int [] muestras1 = new int[500*3];
         SamplesECG canal1;
+        SamplesECG canal2;
+        SamplesECG canal3;
         //int[] muestras2 = new int[500*3];
         int[] muestras2;
         DigitalFilter samplesFiltered = new DigitalFilter();
@@ -131,36 +133,54 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
             /*No se realizo el estudio del ECG y ademas no hay conexion Bt.*/
             Toast.makeText(getApplicationContext(), "Atencion: ECG: No realizado. BT: No conectado. Guardando datos paciente.",Toast.LENGTH_LONG).show();
             canal1 = new SamplesECG();
+            canal2 = new SamplesECG();
+            canal3 = new SamplesECG();
         }
         else if (bool_Receive == false && isConectionActive == true){
             /*  No se realizo el estudio del ECG y pero hax conexion Bt.
                 Recomendar conectar Bt para guardar el ECG del paciente */
             Toast.makeText(getApplicationContext(), "Atencion: ECG: No realizado. BT: Conectado. Guardando datos paciente.",Toast.LENGTH_LONG).show();
             canal1 = new SamplesECG();
+            canal2 = new SamplesECG();
+            canal3 = new SamplesECG();
         }
         else if (bool_Receive == true && isConectionActive == false) {
             /*  Se realizo previamente el estudio del ECG y pero Antes de guardarlo se desconecto. Avisar para los proximos estudios */
+            bool_Receive = false; /*Libero el flag que indica si se realizo ya el estudio y no se guardo*/
             Toast.makeText(getApplicationContext(), "Atencion: ECG: Correcto. BT: Desconectado. Guardando datos paciente y ECG.",Toast.LENGTH_LONG).show();
-            canal1 = (SamplesECG) datos.getSerializable("serial");
+            canal1 = (SamplesECG) datos.getSerializable("canal1");
+            canal2 = (SamplesECG) datos.getSerializable("canal2");
+            canal3 = (SamplesECG) datos.getSerializable("canal3");
         }
         else {
             /*Se hizo previamente el estudio ECG y sigue habiendo BT */
             bool_Receive = false; /*Libero el flag que indica si se realizo ya el estudio y no se guardo*/
             Toast.makeText(getApplicationContext(), "ECG: Correcto. BT: Conectado. Guardando datos paciente y ECG.", Toast.LENGTH_LONG).show();
-            canal1 = (SamplesECG) datos.getSerializable("serial");
+            canal1 = (SamplesECG) datos.getSerializable("canal1");
+            canal2 = (SamplesECG) datos.getSerializable("canal2");
+            canal3 = (SamplesECG) datos.getSerializable("canal3");
         }
 
-        /* Aca hago el analisis con los filtros digitales */
+        /* Aca hago el analisis con los filtros digitales para el canal 1*/
         canal1.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
-        canal1.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples); //filtro notch
-        canal1.Samples = samplesFiltered.iirFilter(samplesFiltered.b_lowpass, samplesFiltered.a_lowpass, canal1.Samples); //filtro pasa bajos
+        canal1.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples, "notch"); //filtro notch
+        canal1.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
 
+        /* Aca hago el analisis con los filtros digitales para el canal 2*/
+        canal2.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
+        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples, "notch"); //filtro notch
+        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
 
-            /* TODO: ESTA PARTE DEL CODIGO ESTA IMPLEMENTADA DOS VECES. ELIMINAR LA PRIMERA VERSION. */
+        /* Aca hago el analisis con los filtros digitales para el canal 3*/
+        canal3.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples, "notch"); //filtro notch
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
 
-            // canal1 = (SamplesECG) datos.getSerializable("serial");
+        /* TODO: ESTA PARTE DEL CODIGO ESTA IMPLEMENTADA DOS VECES. ELIMINAR LA PRIMERA VERSION. */
 
-            /* TODO: ME PARECE QUE ES ESTE EL QUE NO VA
+        // canal1 = (SamplesECG) datos.getSerializable("serial");
+
+            /* TODO: ME PARECE QUE ES ESTE EL QUE NO VA PERO LO DEJO COMENTADO POR SI ERA UN TEMA DE LA BASE DE DATOS
 
             muestras1 = datos.getIntArray("muestras");
             String str_samples = Arrays.toString(muestras1);
@@ -205,30 +225,10 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
             classPacientFull classPacient_paciente = new classPacientFull();
             manager.insertPacient(classPacient_paciente);
 
-        } else if (versionFinal == true){
+        } else {
             /* La separacion de campos completos o no se hace en el constructor. Se mandan todos los campos */
-            classPacientFull classPacient_paciente = new classPacientFull(editT_var_lastName.getText().toString(), editT_var_firstName.getText().toString(), editT_var_document.getText().toString(), editT_var_phone.getText().toString(), editT_var_observ.getText().toString(), canal1, versionFinal);
+            classPacientFull classPacient_paciente = new classPacientFull(editT_var_lastName.getText().toString(), editT_var_firstName.getText().toString(), editT_var_document.getText().toString(), editT_var_phone.getText().toString(), editT_var_observ.getText().toString(), canal1, canal2, canal3);
             manager.insertPacient(classPacient_paciente);
-        }
-        else{
-            /*Los campos obligatorios estan*/
-                if (editT_var_phone.getText().toString().matches("") && observ.matches("")) {
-            /*Falta el telefono y las observ*/
-                    classPacientFull classPacient_paciente = new classPacientFull(apellido, nombre, documento);
-                    manager.insertPacient(classPacient_paciente);
-                } else if (editT_var_phone.getText().toString().matches("") && !(observ.matches(""))) {
-                /*Falta el telefono*/
-                    classPacientFull classPacient_paciente = new classPacientFull(apellido, nombre, documento, observ);
-                    manager.insertPacient(classPacient_paciente);
-                } else if (!(editT_var_phone.getText().toString().matches("")) && (observ.matches(""))) {
-                /*Falta las observ*/
-                    classPacientFull classPacient_paciente = new classPacientFull(apellido, nombre, documento, phone);
-                    manager.insertPacient(classPacient_paciente);
-                } else if (!(editT_var_phone.getText().toString().matches("")) && !(observ.matches(""))) {
-                /*Estan todos*/
-                    classPacientFull classPacient_paciente = new classPacientFull(apellido, nombre, documento, phone, observ, canal1);
-                    manager.insertPacient(classPacient_paciente);
-                }
         }
     }
 

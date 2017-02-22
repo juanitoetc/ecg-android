@@ -46,7 +46,7 @@ public class DataBaseManager {
         db = helper.getWritableDatabase(); /*Nos devuelve la base de datos creandola o abriendola*/
     }
 
-    public ContentValues generateContentValues (String apellido, String nombre, int documento, int phone, String observ, String lead1, String rec_Timestamp, String path){
+    public ContentValues generateContentValues (String apellido, String nombre, int documento, int phone, String observ, String lead1, String lead2, String lead3 , String rec_Timestamp, String path){
 
         ContentValues valores = new ContentValues();
         Long tsLong = System.currentTimeMillis();
@@ -63,6 +63,8 @@ public class DataBaseManager {
         valores.put(CN_PHONE, phone);
         valores.put(CN_OBSERVATIONS, observ);
         valores.put(CN_SAMPLES_I, lead1);
+        valores.put(CN_SAMPLES_II, lead2);
+        valores.put(CN_SAMPLES_III, lead3);
         valores.put(CN_PATH, path);
 
         return valores;
@@ -70,7 +72,7 @@ public class DataBaseManager {
 
     public void insertPacient(classPacientFull paciente){
 
-        db.insert(TABLE_NAME, null, generateContentValues(paciente.str_cPacientLastName,paciente.str_cPacientFirstName, paciente.int_cPacientDocum, paciente.int_cPacientPhone, paciente.str_cObserv, paciente.str_cLeadI, paciente.str_cTimeStamp, paciente.str_cPath));
+        db.insert(TABLE_NAME, null, generateContentValues(paciente.str_cPacientLastName,paciente.str_cPacientFirstName, paciente.int_cPacientDocum, paciente.int_cPacientPhone, paciente.str_cObserv, paciente.str_cLeadI, paciente.str_cLeadII, paciente.str_cLeadIII, paciente.str_cTimeStamp, paciente.str_cPath));
 
     }
 
