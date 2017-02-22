@@ -4,12 +4,12 @@
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable-mdpi/abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
-        "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/drawable-mdpi/abc_popup_background_mtrl_mult.9.png",
-        "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable-mdpi/abc_popup_background_mtrl_mult.9.png"
-    },
-    {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/drawable-mdpi/abc_btn_radio_to_on_mtrl_015.png",
         "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable-mdpi/abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/drawable-mdpi/abc_popup_background_mtrl_mult.9.png",
+        "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable-mdpi/abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/drawable-mdpi/abc_ic_menu_cut_mtrl_alpha.png",

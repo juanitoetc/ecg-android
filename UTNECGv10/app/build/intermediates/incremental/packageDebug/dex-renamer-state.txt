@@ -1,4 +1,4 @@
-#Wed Feb 22 04:04:27 CET 2017
+#Wed Feb 22 05:29:37 CET 2017
 base.0=/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
 file.0=/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
