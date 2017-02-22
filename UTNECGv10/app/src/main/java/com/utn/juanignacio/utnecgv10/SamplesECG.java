@@ -10,6 +10,10 @@ public final class SamplesECG implements Serializable {
 
         public double fs;
         public int[] Samples;
+        public double AVSS_mV = -3300;      //negative analogic reference to ground
+        public double AVDD_mV = 3300;       //positive analogic reference to ground
+        public double ADC_bits = 24;
+        public double ADC_Amp = 6;
 
         public SamplesECG() {
                 //instancia
@@ -60,5 +64,18 @@ public final class SamplesECG implements Serializable {
         }
 
         return recup;
+    }
+
+    public double[] getSamplesInmV(int[] samp_int) {
+
+        double[] sam_mV = new double[samp_int.length];
+        int i = 0;
+        double rangeADCmV = AVDD_mV - AVSS_mV;  //rango dinamico de tension del adc
+        double steps = java.lang.Math.pow(2, ADC_bits);
+
+        for(i=0;i<samp_int.length;i++){
+            sam_mV[i] = (double) ((samp_int[i]*rangeADCmV)/(steps))/(ADC_Amp);
+        }
+        return sam_mV;
     }
 }

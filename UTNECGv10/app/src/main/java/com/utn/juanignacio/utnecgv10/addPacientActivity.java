@@ -167,14 +167,14 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
         canal1.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
 
         /* Aca hago el analisis con los filtros digitales para el canal 2*/
-        canal2.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
-        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples, "notch"); //filtro notch
-        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
+        canal2.Samples = samplesFiltered.removeConstant(canal2.Samples, samplesFiltered.getMedian(canal2.Samples)); //remuevo valor medio
+        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal2.Samples, "notch"); //filtro notch
+        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal2.Samples, "bandpass"); //filtro pasa banda
 
         /* Aca hago el analisis con los filtros digitales para el canal 3*/
-        canal3.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
-        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal1.Samples, "notch"); //filtro notch
-        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal1.Samples, "bandpass"); //filtro pasa banda
+        canal3.Samples = samplesFiltered.removeConstant(canal3.Samples, samplesFiltered.getMedian(canal3.Samples)); //remuevo valor medio
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch_50, samplesFiltered.a_notch_50, canal3.Samples, "notch"); //filtro notch
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bandpass, samplesFiltered.a_bandpass, canal3.Samples, "bandpass"); //filtro pasa banda
 
         /* TODO: ESTA PARTE DEL CODIGO ESTA IMPLEMENTADA DOS VECES. ELIMINAR LA PRIMERA VERSION. */
 

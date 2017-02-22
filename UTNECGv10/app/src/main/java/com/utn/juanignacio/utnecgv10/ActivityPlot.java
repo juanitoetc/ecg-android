@@ -82,17 +82,21 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         for (i=0;i<num_samples;i++)
             samp_plot[i] = canal1.Samples[(canal1.Samples.length)-(num_samples)+i];
 
+        double[] samplesInmV = new double[num_samples];
+
+        samplesInmV = canal1.getSamplesInmV(samp_plot);
+
         /* Inicio Android Plot */
         /*Busco los valores maximos y minimos dentro del array de datos para graficar correctamente*/
-        MIN_Value = samp_plot[0];
-        MAX_Value = samp_plot[0];
+        MIN_Value = samplesInmV[0];
+        MAX_Value = samplesInmV[0];
 
-        for(i = 0; i< samp_plot.length; i++)
+        for(i = 0; i< samplesInmV.length; i++)
         {
-            if(samp_plot[i] < MIN_Value)
-                MIN_Value = samp_plot[i];
-            if(samp_plot[i] > MAX_Value)
-                MAX_Value = samp_plot[i];
+            if(samplesInmV[i] < MIN_Value)
+                MIN_Value = samplesInmV[i];
+            if(samplesInmV[i] > MAX_Value)
+                MAX_Value = samplesInmV[i];
         }
 
         plot = (XYPlot) findViewById(R.id.MiPrimerXY);
@@ -122,14 +126,14 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         backgroundPlot.getGraphWidget().getRangeGridLinePaint().setColor(Color.rgb(254, 172, 172));          //Control de color de eje X
         backgroundPlot.getGraphWidget().getDomainGridLinePaint().setColor(Color.rgb(254, 172, 172));          //Control de color de eje Y
 
-        backgroundPlot.setDomainBoundaries(0, (samp_plot.length) / canal1.fs, BoundaryMode.FIXED);    //Determino los rangos en el eje X
+        backgroundPlot.setDomainBoundaries(0, (samplesInmV.length) / canal1.fs, BoundaryMode.FIXED);    //Determino los rangos en el eje X
         backgroundPlot.setRangeBoundaries(MIN_Value, MAX_Value, BoundaryMode.FIXED);    //Determino los rangos en el eje Y
-        backgroundPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samp_plot.length) / canal1.fs) / 50);     //Controla el incremento en X
+        backgroundPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samplesInmV.length) / canal1.fs) / 50);     //Controla el incremento en X
         backgroundPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value - MIN_Value) / 25);       //Controla el incremento en Y
         /*</background FORMAT>*/
 
         /*<realplot FORMAT>*/
-        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samp_plot.length) / canal1.fs) / 10);     //Controla el incremento en X
+        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samplesInmV.length) / canal1.fs) / 10);     //Controla el incremento en X
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value - MIN_Value) / 5);       //Controla el incremento en Y
 
         plot.setBorderPaint(null);
@@ -147,20 +151,20 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         plot.getGraphWidget().getDomainLabelPaint().setColor(Color.rgb(0,0,0));
         plot.getGraphWidget().getRangeLabelPaint().setColor(Color.rgb(0,0,0));
 
-        plot.setDomainBoundaries(0, (samp_plot.length)/canal1.fs , BoundaryMode.FIXED);    //Determino los rangos en el eje X
+        plot.setDomainBoundaries(0, (samplesInmV.length)/canal1.fs , BoundaryMode.FIXED);    //Determino los rangos en el eje X
         plot.setRangeBoundaries(MIN_Value, MAX_Value, BoundaryMode.FIXED);    //Determino los rangos en el eje Y
         /*<realplot FORMAT>*/
 
         //Copio las muestras que estan en const_file_class a la instancia de la clase Vector
 
-        for(i = 0; i < samp_plot.length ; i++)
+        for(i = 0; i < samplesInmV.length ; i++)
         {
             /*Cargo los valores del tiempo*/
             DatosX = i/(canal1.fs);                          //Ts (tiempo entre muestras)
             VectorXYPlot.add(DatosX);
 
             /*Cargo los valores del ECG*/
-            DatosY = samp_plot[i];
+            DatosY = samplesInmV[i];
             VectorXYPlot.add(DatosY);
         }
 
