@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
+        "outputFile": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 107
                 },
                 "from": {
-                    "file": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/src/main/res/values-w820dp/dimens.xml",
+                    "file": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/src/main/res/values-w820dp/dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
-        "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+        "merged": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
     },
     {
-        "merged": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
-        "source": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+        "merged": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
     }
 ]

@@ -25,7 +25,7 @@ public final class SamplesECG implements Serializable {
         public SamplesECG(int[] muestras) {
 
                 fs = 500;            //Frecuencia de muestreo
-                Samples = new int[500*4];
+                Samples = new int[muestras.length];
                 Samples = muestras;
         }
 

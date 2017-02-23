@@ -1,4 +1,4 @@
-package com.utn.juanignacio.utnecgv10;
+package com.utn.juanignacio.utnecgv10; // 11
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -420,6 +420,13 @@ public class MainActivity extends Activity
     public void conectarDispositivo(String direccion)
     {
         Toast.makeText(this, "Conectando a " + direccion, Toast.LENGTH_LONG).show();
+
+        if (servicio == null)
+        {
+            servicio = new BluetoothService(this, handler, bAdapter);
+
+        }
+
         if(servicio != null)
         {
             BluetoothDevice dispositivoRemoto = bAdapter.getRemoteDevice(direccion);

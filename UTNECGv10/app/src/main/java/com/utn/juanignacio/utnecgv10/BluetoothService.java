@@ -398,12 +398,12 @@ public class BluetoothService{
             byte[] buffer_samples_DI = new byte[500*4*4];   // 500 sps
             byte[] buffer_samples_DII = new byte[500*4*4];   // 500 sps
             byte[] buffer_recepcion = new byte [1];
-            int[] muestras_DI = new int [(buffer_samples_DI.length)/4];;
-            int[] muestras_DII = new int [(buffer_samples_DI.length)/4];;
-            int[] muestras_DIII = new int [(buffer_samples_DI.length)/4];;
-            int[] aux_muestras_DI = new int[500*4];//3 seg
-            int[] aux_muestras_DII = new int[500*4];//3 seg
-            int[] aux_muestras_DIII = new int[500*4];//3 seg
+            int[] muestras_DI;
+            int[] muestras_DII;
+            int[] muestras_DIII;
+            int[] aux_muestras_DI ;
+            int[] aux_muestras_DII ;
+            int[] aux_muestras_DIII;
 
             byte[] buffer_samples = new byte[500*3*4];   // 3600 muestras, 4 bytes c/u
             byte[] largo_msj = new byte[5];
@@ -421,7 +421,7 @@ public class BluetoothService{
             setEstado(ESTADO_CONECTADO);
 
             // Obtengo el handler de addPatientActivity
-            Handler handler2 = HandlerAux.getHandleraux();
+      //      Handler handler2 = HandlerAux.getHandleraux();
 
             while(true)
             {
@@ -446,11 +446,19 @@ public class BluetoothService{
                         bytes_samples=0;
                         while (bytes_samples != largo)
                             bytes_samples += inputStream.read(buffer_samples_DI, bytes_samples, largo - bytes_samples); // recibo el buffer de muestras DI
+                         bytes_samples=0;
                          while (bytes_samples != largo)
                              bytes_samples += inputStream.read(buffer_samples_DII, bytes_samples, largo - bytes_samples); // recibo el buffer de muestras de DII
 
-                        for (int i =0; i<3*500 ; i++)
-                        {
+                         muestras_DI = new int [buffer_samples_DI.length/4];
+                         muestras_DII = new int [buffer_samples_DI.length/4];
+                         muestras_DIII = new int [buffer_samples_DI.length/4];
+                         aux_muestras_DI = new int [buffer_samples_DI.length/4];
+                         aux_muestras_DII = new int [buffer_samples_DI.length/4];
+                         aux_muestras_DIII = new int [buffer_samples_DI.length/4];
+
+                         for (int i =0; i<largo/4 ; i++)
+                         {
                             //Inicializo el entero en el cual trabajo
                             muestras_DI[i]=0;
                             muestras_DII[i]= 0;
@@ -473,6 +481,10 @@ public class BluetoothService{
                          SamplesECG canal_I = new SamplesECG(muestras_DI);
                          SamplesECG canal_II = new SamplesECG(muestras_DII);
                          SamplesECG canal_III = new SamplesECG(muestras_DIII);
+
+                         // inicializo el handler
+                         Handler handler2 = HandlerAux.getHandleraux();
+
 
                          // Mensaje y bundle para comunicarme a travez de activities
                          Message m = new Message();
