@@ -61,26 +61,6 @@ public class DigitalFilter {
         return y_salida;
     } /* end of filter */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public int[] iirFilter(double[] bCoeff, double[] aCoeff, int[] samples, String type){
         /* Metedo para implemetacion de un filtro IIR */
 

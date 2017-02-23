@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
+        "outputFile": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 106
                 },
                 "from": {
-                    "file": "/home/juani/Android/ecg-android-master_22-02/ecg-android-master/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-port/values-port.xml",
+                    "file": "/home/juani/MyGitHub/ecg-android/UTNECGv10/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-port/values-port.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
