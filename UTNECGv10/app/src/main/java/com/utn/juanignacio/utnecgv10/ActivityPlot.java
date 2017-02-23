@@ -55,6 +55,12 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
     public String path_img;
     public int num_samples;
     final static int duration = 3; //duracion de lo que quiero graficar
+    public double MAX_Value_fixed_y = 1.5;          //mV
+    public double MIN_Value_fixed_y = -1.5;         //mV
+    public double NumThickLines_y = 6;              // Divisiones de lineas gruesas, exterior de los cuadrados grandes y
+    public double NumFineLines_y = 5;               // Divisiones de lineas finas, interior de los cuadrados grandes y
+    public double NumFineLines_x = 5;               //Divisiones de lineas finas, interior de los cuadrados grandes x
+    public double timeThickLines_x = 0.2;           //sg. Lo que dura en tiempo un cuadrado grande.
 
     /* FinAndroid Plot Variables*/
 
@@ -123,18 +129,18 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         backgroundPlot.getTitleWidget().setVisible(true);
         backgroundPlot.getTitleWidget().getLabelPaint().setColor(Color.rgb(0, 0, 0));
 
-        backgroundPlot.getGraphWidget().getRangeGridLinePaint().setColor(Color.rgb(254, 172, 172));          //Control de color de eje X
-        backgroundPlot.getGraphWidget().getDomainGridLinePaint().setColor(Color.rgb(254, 172, 172));          //Control de color de eje Y
+        backgroundPlot.getGraphWidget().getRangeGridLinePaint().setColor(Color.rgb(254, 172, 172));         //Control de color de eje X
+        backgroundPlot.getGraphWidget().getDomainGridLinePaint().setColor(Color.rgb(254, 172, 172));        //Control de color de eje Y
 
-        backgroundPlot.setDomainBoundaries(0, (samplesInmV.length) / canal1.fs, BoundaryMode.FIXED);    //Determino los rangos en el eje X
-        backgroundPlot.setRangeBoundaries(MIN_Value, MAX_Value, BoundaryMode.FIXED);    //Determino los rangos en el eje Y
-        backgroundPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samplesInmV.length) / canal1.fs) / 50);     //Controla el incremento en X
-        backgroundPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value - MIN_Value) / 25);       //Controla el incremento en Y
+        backgroundPlot.setDomainBoundaries(0, (samplesInmV.length) / canal1.fs, BoundaryMode.FIXED);        //Determino los extremos en el eje X
+        backgroundPlot.setRangeBoundaries(MIN_Value_fixed_y, MAX_Value_fixed_y, BoundaryMode.FIXED);        //Determino los extremos en el eje Y
+        backgroundPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, (((samplesInmV.length) / canal1.fs) / (timeThickLines_x/NumFineLines_x)));        //Controla el incremento de lineas finas en X
+        backgroundPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value_fixed_y - MIN_Value_fixed_y) / (NumFineLines_y*NumThickLines_y));       //Controla el incremento de lineas finas en Y
         /*</background FORMAT>*/
 
         /*<realplot FORMAT>*/
-        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, ((samplesInmV.length) / canal1.fs) / 10);     //Controla el incremento en X
-        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value - MIN_Value) / 5);       //Controla el incremento en Y
+        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, timeThickLines_x);                                                  //Controla el incremento de lineas gruesas en X
+        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, (MAX_Value_fixed_y - MIN_Value_fixed_y) / NumThickLines_y );         //Controla el incremento de lineas gruesas en Y
 
         plot.setBorderPaint(null);
         plot.setPlotMargins(0, 0, 0, 0);
@@ -151,8 +157,8 @@ public class ActivityPlot extends Activity implements View.OnLongClickListener{
         plot.getGraphWidget().getDomainLabelPaint().setColor(Color.rgb(0,0,0));
         plot.getGraphWidget().getRangeLabelPaint().setColor(Color.rgb(0,0,0));
 
-        plot.setDomainBoundaries(0, (samplesInmV.length)/canal1.fs , BoundaryMode.FIXED);    //Determino los rangos en el eje X
-        plot.setRangeBoundaries(MIN_Value, MAX_Value, BoundaryMode.FIXED);    //Determino los rangos en el eje Y
+        plot.setDomainBoundaries(0, (samplesInmV.length)/canal1.fs , BoundaryMode.FIXED);           //Determino los extremos en el eje X
+        plot.setRangeBoundaries(MIN_Value_fixed_y, MAX_Value_fixed_y, BoundaryMode.FIXED);          //Determino los extremos en el eje Y
         /*<realplot FORMAT>*/
 
         //Copio las muestras que estan en const_file_class a la instancia de la clase Vector
