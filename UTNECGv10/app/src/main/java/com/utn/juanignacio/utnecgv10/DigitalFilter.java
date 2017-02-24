@@ -22,6 +22,12 @@ public class DigitalFilter {
     public double [] a_low = new double [] { 1.00000000000000000000000000000000, 2.39759887373305000000000000000000, 5.36919193965370000000000000000000, 7.52344600776591000000000000000000, 9.31987208611336000000000000000000, 8.93262545609765000000000000000000, 7.52649616788162000000000000000000, 5.23880337169268000000000000000000, 3.19833845840326000000000000000000, 1.65175583620140000000000000000000, 0.74375675393112400000000000000000, 0.28451210428888600000000000000000, 0.09370784385181280000000000000000, 0.02595463505184700000000000000000, 0.00604594219108841000000000000000, 0.00115163780293827000000000000000, 0.00017637929086426900000000000000, 0.00002074140673739660000000000000, 0.00000177057385782720000000000000, 0.00000009714949762635500000000000, 0.00000000258639259258589000000000};
     public double [] b_low = new double [] { 0.00005084367380682720000000000000, 0.00101687347613654000000000000000, 0.00966029802329717000000000000000, 0.05796178813978300000000000000000, 0.24633759959407800000000000000000, 0.78828031870104900000000000000000, 1.97070079675262000000000000000000, 3.94140159350525000000000000000000, 6.40477758944603000000000000000000, 8.53970345259470000000000000000000, 9.39367379785417000000000000000000, 8.53970345259470000000000000000000, 6.40477758944603000000000000000000, 3.94140159350525000000000000000000, 1.97070079675262000000000000000000, 0.78828031870104900000000000000000, 0.24633759959407800000000000000000, 0.05796178813978300000000000000000, 0.00966029802329717000000000000000, 0.00101687347613654000000000000000, 0.00005084367380682720000000000000};
 
+
+    public double []  a_notch = new double[]{1,-1.568734520361622,0.939062505817492};
+    public double []  b_notch = new double[]{0.969531252908746,-1.568734520361622,0.969531252908746};
+    public double []  a_bpf = new double[]{1,-4.879772376282705,10.501636594353757,-13.633996737609015,12.230381968080529,-7.819835579695498,3.367857235221440,-0.879164844377859,0.112893740311716};
+    public double []  b_bpf = new double[]{0.048350540796760,0,-0.193402163187040,0,0.290103244780560,0,-0.193402163187040,0,0.048350540796760};
+
     public int [] filter( double []a, double []b, int []x_int)
     {
         double []x= new double[x_int.length];
@@ -101,12 +107,11 @@ public class DigitalFilter {
             sumCoefa = sumCoeff(aCoeff);
             sumCoefb = sumCoeff(bCoeff);
             for (int i=0; i<int_y_out.length; i++)
-                int_y_out[i] = (int)(((y_out[i])*(sumCoefa))/(sumCoefb));
+                y_out[i] = (((y_out[i])*(sumCoefa))/(sumCoefb));
+            int_y_out = round(y_out);
         }else{
-            for (int i=0; i<int_y_out.length; i++)
-                int_y_out[i] = (int)(y_out[i]);
+            int_y_out = round(y_out);
         }
-
         // retorno el array con la senial filtrada
         return int_y_out;
     }
@@ -143,6 +148,61 @@ public class DigitalFilter {
             sum = sum + coeff[i];
 
         return sum;
+    }
+
+    public double sumProdCoeff (double[] sampA, double[] sampB){
+        /* Producto de los elementos de dos vectores*/
+        int numSamp = sampA.length;
+        int i = 0;
+        double prod = 0;
+
+        for(i = 0; i < numSamp; i ++)
+            prod += sampA[i]*sampB[i];
+        return prod;
+    }
+
+    public double leastSqrt_m(double[] sampA, double[] sampB){
+        /*calculo la pendiente de la recta que mejor aproxima segun el metodo de cuadrados minimos*/
+        int numSamp = sampA.length;
+        double lSqrt_m = (((numSamp)*sumProdCoeff(sampA,sampB))-(sumCoeff(sampA))*(sumCoeff(sampB))/((numSamp*(sumProdCoeff(sampA, sampA)))-(Math.pow(sumCoeff(sampA), 2))));
+        return lSqrt_m;
+    }
+
+    public double leastSqrt_b(double[] sampA, double[] sampB){
+        /*calculo la ordenada de la recta que mejor aproxima segun el metodo de cuadrados minimos*/
+        int numSamp = sampA.length;
+        double lSqrt_b = ((((sumCoeff(sampB))*(sumProdCoeff(sampA,sampA)))-((sumCoeff(sampA))*(sumProdCoeff(sampA,sampB))))/((numSamp*(sumProdCoeff(sampA, sampA)))-(Math.pow(sumCoeff(sampA), 2))));
+        return lSqrt_b;
+    }
+
+    public int[] generateLineSqrt(double[] time, double mLine, double bLine){
+        /*Genero la recta segun el metodo de minimos cuadrados*/
+        int numSamp = time.length;
+        int i = 0;
+        int[] line = new int[numSamp];
+
+        for(i = 0; i < numSamp; i++)
+            line[i] = (int)(mLine*time[i]+bLine);
+        return line;
+    }
+
+    public int[] deleteArrayFromArray(int[] original, int[]toDelete){
+        int numSamp = original.length;
+        int [] result = new int[numSamp];
+        int i = 0;
+        for(i = 0; i < numSamp; i++)
+            result[i] = original[i] - toDelete[i];
+        return result;
+    }
+
+    public int[] round(double[] samples){
+        int numSamp = samples.length;
+        int[] resultRound = new int[numSamp];
+        int i = 0;
+
+        for(i=0; i<numSamp; i++)
+            resultRound[i] = (int) Math.round(samples[i]);
+        return resultRound;
     }
 
 }

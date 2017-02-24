@@ -161,14 +161,21 @@ public class addPacientActivity extends ActionBarActivity implements View.OnClic
             canal3 = (SamplesECG) datos.getSerializable("canal3");
         }
 
-        canal1.Samples =samplesFiltered.filter(samplesFiltered.a_notch_50,samplesFiltered.b_notch_50,canal1.Samples);
-        canal2.Samples =samplesFiltered.filter(samplesFiltered.a_notch_50,samplesFiltered.b_notch_50,canal2.Samples);
-        canal3.Samples =samplesFiltered.filter(samplesFiltered.a_notch_50,samplesFiltered.b_notch_50,canal3.Samples);
+        /* Aca hago el analisis con los filtros digitales para el canal 1*/
+        canal1.Samples = samplesFiltered.removeConstant(canal1.Samples, samplesFiltered.getMedian(canal1.Samples)); //remuevo valor medio
+        canal1.Samples =samplesFiltered.iirFilter(samplesFiltered.b_notch,samplesFiltered.a_notch,canal1.Samples, "notch");
 
-        canal1.Samples =samplesFiltered.filter(samplesFiltered.a_low,samplesFiltered.b_low,canal1.Samples);
-        canal2.Samples =samplesFiltered.filter(samplesFiltered.a_high,samplesFiltered.b_high,canal2.Samples);
-        canal3.Samples =samplesFiltered.filter(samplesFiltered.a_low,samplesFiltered.b_low,canal3.Samples);
-        canal3.Samples =samplesFiltered.filter(samplesFiltered.a_high,samplesFiltered.b_high,canal3.Samples);
+        /*Aca hago el analisis de la derivacion 2*/
+        canal2.Samples = samplesFiltered.removeConstant(canal2.Samples, samplesFiltered.getMedian(canal2.Samples)); //remuevo valor medio
+        canal2.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bpf,samplesFiltered.a_bpf,canal2.Samples, "bandpass");
+        canal2.Samples = samplesFiltered.removeConstant(canal2.Samples, samplesFiltered.getMedian(canal2.Samples)); //remuevo valor medio
+
+        /*Aca hago el analisis de la derivacion 3*/
+        canal3.Samples = samplesFiltered.removeConstant(canal3.Samples, samplesFiltered.getMedian(canal3.Samples)); //remuevo valor medio
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_notch,samplesFiltered.a_notch,canal3.Samples, "notch");
+        canal3.Samples = samplesFiltered.removeConstant(canal3.Samples, samplesFiltered.getMedian(canal3.Samples)); //remuevo valor medio
+        canal3.Samples = samplesFiltered.iirFilter(samplesFiltered.b_bpf,samplesFiltered.a_bpf,canal3.Samples, "bandpass");
+        canal3.Samples = samplesFiltered.removeConstant(canal3.Samples, samplesFiltered.getMedian(canal3.Samples));
 
 
 
